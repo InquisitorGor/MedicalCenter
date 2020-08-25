@@ -1,56 +1,94 @@
 'use strict';
 
 import ExtReactDOM from '@sencha/ext-react-modern';
-import { ExtButton } from '@sencha/ext-react-modern';
-import { FormPanel, CheckBoxField } from '@sencha/ext-react-modern';
-
-// tag::vars[]
-const React = require('react'); // <1>
-//const ReactDOM = require('react-dom'); // <2>
-const client = require('./client'); // <3>
-// end::vars[]
-
-// tag::app[]
-class MainApp extends React.Component { // <1>
+import {ExtButton} from '@sencha/ext-react-modern';
+import {FormPanel, CheckBoxField, Panel, Container} from '@sencha/ext-react-modern';
 
 
-	getButton(){
-		return (
-			//<EmployeeList employees={this.state.employees}/>
-			<ExtButton text="click me"></ExtButton>
-		)
-	}
+const React = require('react');
 
-	render() { // <3>
-		// return (
-		// 	//<EmployeeList employees={this.state.employees}/>
-		// 	<ExtButton text="click me"></ExtButton>
-		// )
-		return (
-			<FormPanel shadow layout={{type: 'vbox', align: 'left'}} bodyPadding="10">
-				<CheckBoxField boxLabel="Checked"/>
-				<CheckBoxField boxLabel="Checked" checked/>
-				<CheckBoxField boxLabel="Disabled" checked/>
-				<CheckBoxField boxLabel="Disabled (checked)" disabled checked/>
-			</FormPanel>
 
-		)
-	}
+class MainApp extends React.Component {
+
+    render() {
+        return (
+            <FormPanel shadow layout={{type: 'vbox', align: 'left'}} bodyPadding="10">
+                <CheckBoxField boxLabel="Checked"/>
+                <CheckBoxField boxLabel="Checked" checked/>
+                <CheckBoxField boxLabel="Disabled" checked/>
+                <CheckBoxField boxLabel="Disabled (checked)" disabled checked/>
+            </FormPanel>
+
+        )
+    }
 }
+
 class ButtonExm extends React.Component {
-	render() { // <3>
-		return (
-			//<EmployeeList employees={this.state.employees}/>
-			<ExtButton text="click me"></ExtButton>
-		)
-	}
+    render() {
+        return (
+            <ExtButton text="click me"></ExtButton>
+        )
+    }
 }
 
+class DockBottom extends React.Component {
+    render() {
+        return (
+            <Panel shadow layout="fit">
+                <Panel
+                    title="Dock Left"
+                    docked="left"
+                    width={200}
+                    height={1000}
+                    layout="center"
+                    collapsible="left"
+                    resizable={{
+                        split: true,
+                        edges: 'east',
+                        dynamic: true
+                    }}
+                >
+                    <code>dynamic: true</code>
+                </Panel>
+                <Panel
+                    docked="top"
+                    title="Dock Top"
+                    flex={3}
+                    resizable={{
+                        split: true,
+                        edges: 'south'
+                    }}
+                />
+                <Panel
+                    docked="bottom"
+                    title="Dock Bottom"
+                    flex={1}
+                    layout="center"
+                    resizable={{
+                        split: true,
+                        edges: 'north',
+                        snap: 50
+                    }}
+                >
+                    <code>snap: 50</code>
+                </Panel>
+            </Panel>
+        )
+    }
+}
+
+
+const styles = {
+    panelBody: {
+        fontSize: '18px',
+        color: '#777'
+    }
+}
 
 const Ext = window['Ext'];
 Ext.onReady(() => {
-	ExtReactDOM.render(<ButtonExm />, document.getElementById('react'));
-	ExtReactDOM.render(<MainApp />, document.getElementById('draw'));
+    ExtReactDOM.render(<DockBottom/>, document.getElementById('bottomPanel'));
+
 });
-// end::render[]
+
 
