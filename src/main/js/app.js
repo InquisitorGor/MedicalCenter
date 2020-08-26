@@ -2,7 +2,7 @@
 
 import ExtReactDOM from '@sencha/ext-react-modern';
 import {ExtButton} from '@sencha/ext-react-modern';
-import {FormPanel, CheckBoxField, Panel, Container} from '@sencha/ext-react-modern';
+import {FormPanel, CheckBoxField, Panel, Container, Grid, Column} from '@sencha/ext-react-modern';
 
 
 const React = require('react');
@@ -22,6 +22,26 @@ class MainApp extends React.Component {
         )
     }
 }
+// class UsersGrid extends React.Component {
+//
+//     store = Ext.create('Ext.data.Store', {
+//         fields: ['name', 'email'],
+//         data: [
+//             { name: 'Tim Smith', email: 'tim101@gmail.com' },
+//             { name: 'Jill Lindsey', email: 'jlindsey890@gmail.com' }
+//         ]
+//     })
+//
+//     render() {
+//         return (
+//             <Grid title="Users" store={this.store}>
+//                 <Column text="Name" dataIndex="name"/>
+//                 <Column text="Email" dataIndex="email"/>
+//             </Grid>
+//         )
+//     }
+//
+// }
 
 class ButtonExm extends React.Component {
     render() {
@@ -31,12 +51,12 @@ class ButtonExm extends React.Component {
     }
 }
 
-class DockBottom extends React.Component {
+class MainView extends React.Component {
     render() {
         return (
-            <Panel shadow layout="fit">
+            <Panel fullscreen='true'>
                 <Panel
-                    title="Dock Left"
+                    title="Разделы"
                     docked="left"
                     width={200}
                     height={1000}
@@ -48,7 +68,9 @@ class DockBottom extends React.Component {
                         dynamic: true
                     }}
                 >
-                    <code>dynamic: true</code>
+                    <Panel><code>Раздел "Врачи"</code></Panel>
+                    <Panel><code>Раздел "Направления"</code></Panel>
+                    <Panel><code>Раздел "Расписание"</code></Panel>
                 </Panel>
                 <Panel
                     docked="top"
@@ -78,16 +100,16 @@ class DockBottom extends React.Component {
 }
 
 
-const styles = {
-    panelBody: {
-        fontSize: '18px',
-        color: '#777'
-    }
-}
+// const styles = {
+//     panelBody: {
+//         fontSize: '18px',
+//         color: '#777'
+//     }
+// }@babel/plugin-proposal-class-properties
 
 const Ext = window['Ext'];
 Ext.onReady(() => {
-    ExtReactDOM.render(<DockBottom/>, document.getElementById('bottomPanel'));
+    ExtReactDOM.render(<MainView/>, document.getElementById('bottomPanel'));
 
 });
 
