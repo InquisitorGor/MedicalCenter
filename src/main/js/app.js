@@ -1,55 +1,12 @@
 'use strict';
 
 import ExtReactDOM from '@sencha/ext-react-modern';
-import {ExtButton} from '@sencha/ext-react-modern';
-import {FormPanel, CheckBoxField, Panel, Container, Grid, Column} from '@sencha/ext-react-modern';
+import {Panel} from '@sencha/ext-react-modern';
 
 
 const React = require('react');
 
 
-class MainApp extends React.Component {
-
-    render() {
-        return (
-            <FormPanel shadow layout={{type: 'vbox', align: 'left'}} bodyPadding="10">
-                <CheckBoxField boxLabel="Checked"/>
-                <CheckBoxField boxLabel="Checked" checked/>
-                <CheckBoxField boxLabel="Disabled" checked/>
-                <CheckBoxField boxLabel="Disabled (checked)" disabled checked/>
-            </FormPanel>
-
-        )
-    }
-}
-// class UsersGrid extends React.Component {
-//
-//     store = Ext.create('Ext.data.Store', {
-//         fields: ['name', 'email'],
-//         data: [
-//             { name: 'Tim Smith', email: 'tim101@gmail.com' },
-//             { name: 'Jill Lindsey', email: 'jlindsey890@gmail.com' }
-//         ]
-//     })
-//
-//     render() {
-//         return (
-//             <Grid title="Users" store={this.store}>
-//                 <Column text="Name" dataIndex="name"/>
-//                 <Column text="Email" dataIndex="email"/>
-//             </Grid>
-//         )
-//     }
-//
-// }
-
-class ButtonExm extends React.Component {
-    render() {
-        return (
-            <ExtButton text="click me"></ExtButton>
-        )
-    }
-}
 
 class MainView extends React.Component {
     render() {
@@ -98,15 +55,6 @@ class MainView extends React.Component {
         )
     }
 }
-
-
-// const styles = {
-//     panelBody: {
-//         fontSize: '18px',
-//         color: '#777'
-//     }
-// }@babel/plugin-proposal-class-properties
-
 const Ext = window['Ext'];
 Ext.onReady(() => {
     ExtReactDOM.render(<MainView/>, document.getElementById('bottomPanel'));
