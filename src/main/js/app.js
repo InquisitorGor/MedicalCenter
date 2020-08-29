@@ -1,7 +1,7 @@
 'use strict';
 
 import ExtReactDOM from '@sencha/ext-react-modern';
-import {SearchField, TitleBar, Container, Button, Menu, MenuItem} from '@sencha/ext-react-modern';
+import {Panel, TitleBar, Container, Button, Menu, MenuItem, Image} from '@sencha/ext-react-modern';
 
 
 const React = require('react');
@@ -19,17 +19,18 @@ class MainView extends React.Component {
                 "!phone":{
                     titleAlign: 'center',
                     width: '100%',
-                    height: '100px'
+                    height: '900px',
+                    margin: '0'
                 }
             }}>
-                <TitleBar title="App Title" docked="top"
+                <TitleBar title="Medical Center" docked="top"
                           platformConfig={{
                               phone: {
                                   titleAlign: 'center'
                               }
                           }}
                 >
-                    <Button align="left" iconCls="x-fa fa-bars" arrow={false}>
+                    <Button align="left">
                         {Ext.os.is.Phone && (
                             <Menu>
                                 <MenuItem text="Inbox" iconCls="x-fa fa-inbox"/>
@@ -39,31 +40,58 @@ class MainView extends React.Component {
                     </Button>
 
                     {!Ext.os.is.Phone && (
-                        <Button align="right" iconCls="x-fa fa-inbox" text="Inbox"/>
+                        <Button align="right" iconCls="x-fa fa-home" text="Home"/>
                     )}
                     {!Ext.os.is.Phone && (
-                        <Button align="right" iconCls="x-fa fa-user" text="Profile"/>
+                        <Button align="right" iconCls="x-fa fa-heartbeat" text="Doctors"/>
                     )}
                     {!Ext.os.is.Phone && (
-                        <SearchField align="right" ui="alt" placeholder="Search" margin="0 10"/>
+                        <Button align="right" iconCls="x-fa fa-notes-medical" text="Doctor's notes"/>
+                    )}
+                    {!Ext.os.is.Phone && (
+                        <Button align="right" iconCls="x-fa fa-calendar-plus" text="Schedule"/>
                     )}
 
-                    <Button align="right" iconCls="x-fa fa-ellipsis-v" arrow={false}>
-                        <Menu>
-                            <MenuItem text="Settings" iconCls="x-fa fa-cog"/>
-                            <MenuItem text="Help" iconCls="x-fa fa-question-circle"/>
-                        </Menu>
-                    </Button>
                 </TitleBar>
-
-                {Ext.os.is.Phone && (
-                    <SearchField ui="faded" placeholder="Search" margin="20"/>
-                )}
+                <Panel
+                    docked="bottom"
+                    title="Common information"
+                    height={250}
+                    layout="hbox"
+                    style={styles.heading}
+                >
+                    <Panel docked="left" layout="vbox" style={{margin: '10px'}}>
+                        <div><b>Contacts</b></div>
+                        <div>(4922)32-21-29 - Registry</div>
+                        <div>root@gp2stud@gmail.com</div>
+                    </Panel>
+                    <Panel docked="left" layout="vbox" style={{margin: '10px'}}>
+                        <div><b>Working hours</b></div>
+                        <div>Mn-Fr: 7:30 a.m - 7:00 p.m</div>
+                        <div>St: 8:00 a.m - 4:00 p.m Sun: 9:00 a.m - 3:00 p.m</div>
+                    </Panel>
+                    <Image docked="left"
+                        height="191"
+                        width="505"
+                        src="img/map.jpg"
+                    />
+                </Panel>
             </Container>
         )
     }
 
 }
+const styles = {
+    heading: {
+        fontSize: '13px',
+        fontFamily: 'Menlo, Courier',
+    }
+}
+const cardDefaults = {
+    fontSize: '16px',
+    padding: '10px'
+};
+
 const Ext = window['Ext'];
 Ext.onReady(() => {
     ExtReactDOM.render(<MainView/>, document.getElementById('bottomPanel'));
