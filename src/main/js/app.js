@@ -1,7 +1,7 @@
 'use strict';
 
 import ExtReactDOM from '@sencha/ext-react-modern';
-import {Panel} from '@sencha/ext-react-modern';
+import {SearchField, TitleBar, Container, Button, Menu, MenuItem} from '@sencha/ext-react-modern';
 
 
 const React = require('react');
@@ -9,51 +9,60 @@ const React = require('react');
 
 
 class MainView extends React.Component {
+
     render() {
         return (
-            <Panel fullscreen='true'>
-                <Panel
-                    title="Разделы"
-                    docked="left"
-                    width={200}
-                    height={1000}
-                    layout="center"
-                    collapsible="left"
-                    resizable={{
-                        split: true,
-                        edges: 'east',
-                        dynamic: true
-                    }}
+            <Container platformConfig={{
+                phone: {
+                    titleAlign: 'center'
+                },
+                "!phone":{
+                    titleAlign: 'center',
+                    width: '100%',
+                    height: '100px'
+                }
+            }}>
+                <TitleBar title="App Title" docked="top"
+                          platformConfig={{
+                              phone: {
+                                  titleAlign: 'center'
+                              }
+                          }}
                 >
-                    <Panel><code>Раздел "Врачи"</code></Panel>
-                    <Panel><code>Раздел "Направления"</code></Panel>
-                    <Panel><code>Раздел "Расписание"</code></Panel>
-                </Panel>
-                <Panel
-                    docked="top"
-                    title="Dock Top"
-                    flex={3}
-                    resizable={{
-                        split: true,
-                        edges: 'south'
-                    }}
-                />
-                <Panel
-                    docked="bottom"
-                    title="Dock Bottom"
-                    flex={1}
-                    layout="center"
-                    resizable={{
-                        split: true,
-                        edges: 'north',
-                        snap: 50
-                    }}
-                >
-                    <code>snap: 50</code>
-                </Panel>
-            </Panel>
+                    <Button align="left" iconCls="x-fa fa-bars" arrow={false}>
+                        {Ext.os.is.Phone && (
+                            <Menu>
+                                <MenuItem text="Inbox" iconCls="x-fa fa-inbox"/>
+                                <MenuItem text="Profile" iconCls="x-fa fa-user"/>
+                            </Menu>
+                        )}
+                    </Button>
+
+                    {!Ext.os.is.Phone && (
+                        <Button align="right" iconCls="x-fa fa-inbox" text="Inbox"/>
+                    )}
+                    {!Ext.os.is.Phone && (
+                        <Button align="right" iconCls="x-fa fa-user" text="Profile"/>
+                    )}
+                    {!Ext.os.is.Phone && (
+                        <SearchField align="right" ui="alt" placeholder="Search" margin="0 10"/>
+                    )}
+
+                    <Button align="right" iconCls="x-fa fa-ellipsis-v" arrow={false}>
+                        <Menu>
+                            <MenuItem text="Settings" iconCls="x-fa fa-cog"/>
+                            <MenuItem text="Help" iconCls="x-fa fa-question-circle"/>
+                        </Menu>
+                    </Button>
+                </TitleBar>
+
+                {Ext.os.is.Phone && (
+                    <SearchField ui="faded" placeholder="Search" margin="20"/>
+                )}
+            </Container>
         )
     }
+
 }
 const Ext = window['Ext'];
 Ext.onReady(() => {
